@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import code_generator
+from .utils import code_generator, create_shortcode
 
 
 class ShortenedURL(models.Model):
@@ -10,7 +10,7 @@ class ShortenedURL(models.Model):
 
     def save(self, *args, **kwargs):
         if self.shortcode is None or self.shortcode == "":
-            self.shortcode = code_generator()
+            self.shortcode = create_shortcode(self)
         super(ShortenedURL, self).save(*args, **kwargs)
 
     def __str__(self):
