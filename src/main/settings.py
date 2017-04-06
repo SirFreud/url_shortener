@@ -25,7 +25,7 @@ SECRET_KEY = 'zv_e)@+gny^b($0q@-a7jtf64#ha%8(xe4(-30@6i0w9tzxx*2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.testdev.space', 'testdev.space']
 
 
 # Application definition
@@ -56,11 +56,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'main.urls'
 ROOT_HOSTCONF = 'main.hosts'
 DEFAULT_HOST = 'www'
+DEFAULT_REDIRECT_URL = "http://www.testdev.space:8000"
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")], # Allows me to have one central templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

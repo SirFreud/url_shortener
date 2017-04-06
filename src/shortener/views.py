@@ -1,20 +1,24 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from .models import ShortenedURL
 
 
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "shortener/home.html", {})
+
 # This is a function-based view
-def shortened_redirect_view(request, shortcode=None, *args, **kwargs):
-    obj = get_object_or_404(ShortenedURL, shortcode=shortcode)
-    return HttpResponseRedirect(obj.url)
+# def shortened_redirect_view(request, shortcode=None, *args, **kwargs):
+#     obj = get_object_or_404(ShortenedURL, shortcode=shortcode)
+#     return HttpResponseRedirect(obj.url)
 
 
 # This is a class based view
 class ShortenedCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
         obj = get_object_or_404(ShortenedURL, shortcode=shortcode)
-        return HttpResponse("hello again {sc}".format(sc=shortcode))
+        return HttpResponseRedirect(obj.url)
 
     def post(self, request, shortcode=None, *args, **kwargs):
         return HttpResponse()
